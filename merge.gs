@@ -11,8 +11,8 @@ function doMerge() {
   
   var templateFile = DriveApp.getFileById(selectedTemplateId);
   var mergedFile = templateFile.makeCopy();//make a copy of the template file to use for the merged File. Note: It is necessary to make a copy upfront, and do the rest of the content manipulation inside this single copied file, otherwise, if the destination file and the template file are separate, a Google bug will prevent copying of images from the template to the destination. See the description of the bug here: https://code.google.com/p/google-apps-script-issues/issues/detail?id=1612#c14
-  mergedFile.setName("filled_"+templateFile.getName());//give a custom name to the new file (otherwise it is called "copy of ...")
-  var mergedDoc = DocumentApp.openById(mergedFile.getId());
+  var date = Utilities.formatDate(new Date(), "GMT+1", "yyyy-MM-dd")
+  mergedFile.setName(date+"_filled_"+templateFile.getName());//give a custom name to the new file (otherwise it is called "copy of ...")  var mergedDoc = DocumentApp.openById(mergedFile.getId());
   var bodyElement = mergedDoc.getBody();//the body of the merged document, which is at this point the same as the template doc.
   var bodyCopy = bodyElement.copy();//make a copy of the body
   
